@@ -1255,7 +1255,7 @@ footer {
         align-items: center;
         justify-content: space-around;
 height: 3px;
-        padding: 0px 1px;
+        padding: 0px 3px;
 
         background: rgba(15,20,29,0.88);
 
@@ -1297,7 +1297,7 @@ display: flex;
     justify-content: center;
 align-items: center;
     width: max-content;
-  height: 90%;
+  height: 70%;
       margin: 5px;
 backdrop-filter: blur(3px) saturate(140%);
   -webkit-backdrop-filter: blur(3px);
