@@ -1265,8 +1265,6 @@ backdrop-filter: url(#displacementFilter) blur(3px) saturate(140%);
   -webkit-filter: url(#glass-distortion);
         box-shadow:
             0 15px 50px rgba(0,0,0,0.35);
-
-        backdrop-filter: blur(18px);
     }
 
     .mobile-nav a,
@@ -1279,7 +1277,7 @@ backdrop-filter: url(#displacementFilter) blur(3px) saturate(140%);
 
         min-width: 48px;
 
-        color: var(--muted);
+            color: white;
 
         background: transparent;
 
