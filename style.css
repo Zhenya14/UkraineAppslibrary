@@ -1254,9 +1254,7 @@ footer {
         display: flex;
         align-items: center;
         justify-content: space-around;
-        padding: 4px 0px;
-
-        background: rgba(15,20,29,0.88);
+        padding: 2px 0px;
 
         border: 1px solid var(--border);
 
@@ -1277,9 +1275,9 @@ backdrop-filter: url(#displacementFilter) blur(3px) saturate(140%);
     justify-content: center;
         gap: 3px;
 font-size: 12px;
-        min-width: 58px;
-
-        color: var(--muted);
+        min-width: 68px;
+        min-height: 48px;
+        color: white;
 
         background: transparent;
 
@@ -1296,7 +1294,7 @@ display: flex;
     justify-content: center;
 align-items: center;
     width: max-content;
-  height: 70%;
+  height: 80%;
       margin: 5px;
 backdrop-filter: blur(3px) saturate(140%);
   -webkit-backdrop-filter: blur(3px);
