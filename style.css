@@ -1254,7 +1254,7 @@ footer {
         display: flex;
         align-items: center;
         justify-content: space-around;
-        padding: 6px 1px;
+        padding: 4px 0px;
 
         background: rgba(15,20,29,0.88);
 
@@ -1277,7 +1277,7 @@ backdrop-filter: url(#displacementFilter) blur(3px) saturate(140%);
     justify-content: center;
         gap: 3px;
 font-size: 12px;
-        min-width: 78px;
+        min-width: 58px;
 
         color: var(--muted);
 
