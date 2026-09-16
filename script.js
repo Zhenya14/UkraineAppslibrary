@@ -405,3 +405,33 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+const sections = document.querySelectorAll("#library, #categories, #saved");
+const navLinks = document.querySelectorAll(".mobile-nav a");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+        });
+
+        const link = document.querySelector(
+            `.mobile-nav a[href="#${entry.target.id}"]`
+        );
+
+        if (link) {
+            link.classList.add("active");
+        }
+
+    });
+
+}, {
+    root: null,
+    rootMargin: "-30% 0px -60% 0px",
+    threshold: 0
+});
+
+sections.forEach(section => observer.observe(section));

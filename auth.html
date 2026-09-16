@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    >
+
+    <title>UkraineApps Library — Вхід</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+
+            width: 100%;
+            min-height: 100%;
+
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            color: #ffffff;
+
+            background: #05060a;
+        }
+
+        body {
+            min-height: 100vh;
+
+            overflow-x: hidden;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        .material-symbols {
+            font-family: "Material Symbols Outlined";
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+
+            -webkit-font-feature-settings: "liga";
+            -webkit-font-smoothing: antialiased;
+
+            font-feature-settings: "liga";
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .library-auth-page {
+            position: relative;
+
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 10%,
+                    rgba(40, 100, 255, 0.16),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 10% 90%,
+                    rgba(0, 170, 255, 0.08),
+                    transparent 35%
+                ),
+                #05060a;
+        }
+
+        /* декоративне світло */
+
+        .light-orb {
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(80, 150, 255, 0.13),
+                    transparent 70%
+                );
+
+            filter: blur(20px);
+
+            pointer-events: none;
+        }
+
+        .light-orb.one {
+            top: -140px;
+            left: -100px;
+        }
+
+        .light-orb.two {
+            right: -120px;
+            bottom: -150px;
+        }
+
+        /* =========================
+           AUTH CARD
+        ========================= */
+
+        .library-auth-card {
+            position: relative;
+
+            width: min(420px, 100%);
+
+            padding: 34px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.075),
+                    rgba(255,255,255,0.025)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.12);
+
+            backdrop-filter:
+                blur(24px)
+                saturate(150%);
+
+            -webkit-backdrop-filter:
+                blur(24px)
+                saturate(150%);
+
+            box-shadow:
+                0 30px 90px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+
+            z-index: 2;
+
+            animation: cardAppear 0.45s ease;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .library-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 13px;
+
+            margin-bottom: 30px;
+        }
+
+        .library-logo-icon {
+            width: 56px;
+            height: 56px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(80,150,255,0.22),
+                    rgba(255,255,255,0.045)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.14);
+
+            box-shadow:
+                0 12px 35px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .library-logo-icon .material-symbols {
+            font-size: 30px;
+        }
+
+        .library-logo-text {
+            display: flex;
+            flex-direction: column;
+
+            line-height: 1.1;
+        }
+
+        .library-logo-text strong {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .library-logo-text span {
+            margin-top: 4px;
+
+            color: #929aaa;
+
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        .library-auth-card h1 {
+            margin: 0;
+
+            text-align: center;
+
+            font-size: 27px;
+            font-weight: 700;
+        }
+
+        .auth-description {
+            margin: 9px 0 26px;
+
+            color: #929aaa;
+
+            text-align: center;
+
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        .auth-fields {
+            display: flex;
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .auth-input {
+            width: 100%;
+            height: 54px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 0 15px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid rgba(255,255,255,0.09);
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .auth-input:focus-within {
+            background:
+                rgba(255,255,255,0.07);
+
+            border-color:
+                rgba(100,170,255,0.45);
+
+            box-shadow:
+                0 0 0 3px rgba(70,130,255,0.07);
+        }
+
+        .auth-input > .material-symbols {
+            flex-shrink: 0;
+
+            color: #929aaa;
+
+            font-size: 21px;
+        }
+
+        .auth-input input {
+            width: 100%;
+            min-width: 0;
+
+            padding: 0;
+
+            border: 0;
+            outline: 0;
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 15px;
+        }
+
+        .auth-input input::placeholder {
+            color: #737b8c;
+        }
+
+        .password-button {
+            width: 34px;
+            height: 34px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 0;
+            border-radius: 10px;
+
+            background: transparent;
+
+            color: #929aaa;
+
+            cursor: pointer;
+        }
+
+        .password-button:hover {
+            background: rgba(255,255,255,0.06);
+            color: white;
+        }
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .library-login-button {
+            width: 100%;
+            height: 54px;
+
+            margin-top: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            border:
+                1px solid rgba(255,255,255,0.14);
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(70,130,255,0.24),
+                    rgba(255,255,255,0.08)
+                );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                0 10px 30px rgba(0,0,0,0.2);
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .library-login-button:hover {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(70,130,255,0.32),
+                    rgba(255,255,255,0.11)
+                );
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.12),
+                0 14px 35px rgba(0,0,0,0.25);
+        }
+
+        .library-login-button:active {
+            transform: scale(0.98);
+        }
+
+        .library-login-button.loading {
+            pointer-events: none;
+            opacity: 0.65;
+        }
+
+        /* =========================
+           SECONDARY BUTTON
+        ========================= */
+
+        .library-register-button {
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding: 12px;
+
+            border: 0;
+
+            background: transparent;
+
+            color: #929aaa;
+
+            font-size: 14px;
+
+            cursor: pointer;
+
+            transition:
+                color 0.2s ease;
+        }
+
+        .library-register-button:hover {
+            color: white;
+        }
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================= */
+
+        .forgot-password {
+            display: block;
+
+            margin-top: 5px;
+
+            text-align: center;
+
+            color: #929aaa;
+
+            font-size: 13px;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: color 0.2s ease;
+        }
+
+        .forgot-password:hover {
+            color: white;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .auth-status {
+            min-height: 20px;
+
+            margin-top: 16px;
+
+            text-align: center;
+
+            color: #929aaa;
+
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .auth-status.error {
+            color: #ff7d91;
+        }
+
+        .auth-status.success {
+            color: #72dca0;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 480px) {
+
+            .library-auth-page {
+                padding: 16px;
+            }
+
+            .library-auth-card {
+                padding: 25px 20px;
+
+                border-radius: 25px;
+            }
+
+            .library-logo {
+                margin-bottom: 25px;
+            }
+
+            .library-auth-card h1 {
+                font-size: 24px;
+            }
+
+            .library-logo-icon {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="library-auth-page">
+
+    <div class="light-orb one"></div>
+    <div class="light-orb two"></div>
+
+    <main class="library-auth-card">
+
+        <!-- LOGO -->
+
+        <div class="library-logo">
+
+            <div class="library-logo-icon">
+                <span class="material-symbols">
+                    menu_book
+                </span>
+            </div>
+
+            <div class="library-logo-text">
+                <strong>UkraineApps</strong>
+                <span>Library</span>
+            </div>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1>Вхід</h1>
+
+        <p class="auth-description">
+            Увійдіть до свого акаунта UkraineApps Library
+        </p>
+
+
+        <!-- FORM -->
+
+        <div class="auth-fields">
+
+            <div class="auth-input">
+
+                <span class="material-symbols">
+                    mail
+                </span>
+
+                <input
+                    type="email"
+                    id="login-email"
+                    placeholder="Email"
+                    autocomplete="email"
+                >
+
+            </div>
+
+
+            <div class="auth-input">
+
+                <span class="material-symbols">
+                    lock
+                </span>
+
+                <input
+                    type="password"
+                    id="login-password"
+                    placeholder="Пароль"
+                    autocomplete="current-password"
+                >
+
+                <button
+                    type="button"
+                    class="password-button"
+                    id="show-password"
+                    aria-label="Показати пароль"
+                >
+                    <span class="material-symbols">
+                        visibility
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <button
+            type="button"
+            class="library-login-button"
+            id="login-button"
+        >
+            <span class="material-symbols">
+                login
+            </span>
+
+            <span>
+                Увійти
+            </span>
+        </button>
+
+
+        <!-- REGISTER -->
+
+        <button
+            type="button"
+            class="library-register-button"
+            id="register-button"
+        >
+            Створити акаунт
+        </button>
+
+
+        <!-- FORGOT -->
+
+        <a
+            href="#"
+            class="forgot-password"
+            id="forgot-password"
+        >
+            Забули пароль?
+        </a>
+
+
+        <!-- STATUS -->
+
+        <div
+            class="auth-status"
+            id="auth-status"
+        ></div>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+
+<script>
+
+    /* =====================================================
+       FIREBASE CONFIG
+    ===================================================== */
+
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    const auth = firebase.auth();
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const emailInput =
+        document.getElementById("login-email");
+
+    const passwordInput =
+        document.getElementById("login-password");
+
+    const loginButton =
+        document.getElementById("login-button");
+
+    const registerButton =
+        document.getElementById("register-button");
+
+    const forgotPassword =
+        document.getElementById("forgot-password");
+
+    const showPassword =
+        document.getElementById("show-password");
+
+    const authStatus =
+        document.getElementById("auth-status");
+
+
+    /* =====================================================
+       STATUS
+    ===================================================== */
+
+    function showStatus(message, type = "") {
+
+        authStatus.textContent = message;
+
+        authStatus.className =
+            "auth-status " + type;
+    }
+
+
+    /* =====================================================
+       FIREBASE ERRORS
+    ===================================================== */
+
+    function firebaseError(error) {
+
+        switch (error.code) {
+
+            case "auth/invalid-email":
+                return "Неправильний формат email.";
+
+            case "auth/user-not-found":
+                return "Користувача з таким email не знайдено.";
+
+            case "auth/wrong-password":
+                return "Неправильний пароль.";
+
+            case "auth/invalid-credential":
+                return "Неправильний email або пароль.";
+
+            case "auth/email-already-in-use":
+                return "Цей email вже використовується.";
+
+            case "auth/weak-password":
+                return "Пароль має містити щонайменше 6 символів.";
+
+            case "auth/network-request-failed":
+                return "Помилка мережі. Перевірте підключення до Інтернету.";
+
+            case "auth/too-many-requests":
+                return "Забагато спроб. Спробуйте пізніше.";
+
+            default:
+                return "Сталася помилка. Спробуйте ще раз.";
+        }
+    }
+
+
+    /* =====================================================
+       SHOW / HIDE PASSWORD
+    ===================================================== */
+
+    showPassword.addEventListener("click", () => {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            showPassword.querySelector(
+                ".material-symbols"
+            ).textContent = "visibility_off";
+
+        } else {
+
+            passwordInput.type = "password";
+
+            showPassword.querySelector(
+                ".material-symbols"
+            ).textContent = "visibility";
+
+        }
+
+    });
+
+
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    loginButton.addEventListener("click", async () => {
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        if (!email || !password) {
+
+            showStatus(
+                "Введіть email та пароль.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        loginButton.classList.add("loading");
+
+        showStatus("Виконується вхід...");
+
+
+        try {
+
+            await auth.signInWithEmailAndPassword(
+                email,
+                password
+            );
+
+            showStatus(
+                "Вхід виконано.",
+                "success"
+            );
+
+
+            /*
+             * Тут можна змінити адресу
+             * після успішного входу.
+             */
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "index.html";
+
+            }, 500);
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showStatus(
+                firebaseError(error),
+                "error"
+            );
+
+        } finally {
+
+            loginButton.classList.remove("loading");
+
+        }
+
+    });
+
+
+    /* =====================================================
+       REGISTER
+    ===================================================== */
+
+    registerButton.addEventListener("click", async () => {
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        if (!email || !password) {
+
+            showStatus(
+                "Введіть email та пароль для створення акаунта.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if (password.length < 6) {
+
+            showStatus(
+                "Пароль має містити щонайменше 6 символів.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        registerButton.disabled = true;
+
+        showStatus(
+            "Створення акаунта..."
+        );
+
+
+        try {
+
+            await auth.createUserWithEmailAndPassword(
+                email,
+                password
+            );
+
+
+            showStatus(
+                "Акаунт успішно створено.",
+                "success"
+            );
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "index.html";
+
+            }, 700);
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showStatus(
+                firebaseError(error),
+                "error"
+            );
+
+        } finally {
+
+            registerButton.disabled = false;
+
+        }
+
+    });
+
+
+    /* =====================================================
+       PASSWORD RESET
+    ===================================================== */
+
+    forgotPassword.addEventListener("click", async (event) => {
+
+        event.preventDefault();
+
+
+        const email =
+            emailInput.value.trim();
+
+
+        if (!email) {
+
+            showStatus(
+                "Спочатку введіть свій email.",
+                "error"
+            );
+
+            emailInput.focus();
+
+            return;
+        }
+
+
+        try {
+
+            await auth.sendPasswordResetEmail(email);
+
+            showStatus(
+                "Лист для відновлення пароля надіслано на вашу пошту.",
+                "success"
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+            showStatus(
+                firebaseError(error),
+                "error"
+            );
+
+        }
+
+    });
+
+
+    /* =====================================================
+       ENTER KEY
+    ===================================================== */
+
+    passwordInput.addEventListener("keydown", event => {
+
+        if (event.key === "Enter") {
+            loginButton.click();
+        }
+
+    });
+
+
+    emailInput.addEventListener("keydown", event => {
+
+        if (event.key === "Enter") {
+            passwordInput.focus();
+        }
+
+    });
+
+
+    /* =====================================================
+       AUTH STATE
+    ===================================================== */
+
+    auth.onAuthStateChanged(user => {
+
+        if (user) {
+
+            console.log(
+                "Користувач авторизований:",
+                user.uid
+            );
+
+            /*
+             * Якщо користувач уже авторизований,
+             * можна одразу перенаправити його
+             * до Library.
+             *
+             * Розкоментуй за потреби:
+             *
+             * window.location.href = "index.html";
+             */
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
