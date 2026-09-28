@@ -1,9 +1,23 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyDXiLOi_lFBjffofMAFMUCjPvRTpBl2Grg",
+    authDomain: "videovortex-235cd.firebaseapp.com",
+    databaseURL: "https://videovortex-235cd-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "videovortex-235cd",
+    storageBucket: "videovortex-235cd.appspot.com",
+    messagingSenderId: "681594250269",
+    appId: "1:681594250269:web:c6eb258b0803e8b7d052f4",
+    measurementId: "G-5EBPY9YHSK"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================
        ELEMENTS
     ========================= */
-
     const publishModal = document.getElementById("publishModal");
 
     const openPublishButtons = [
