@@ -341,28 +341,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            const bookRef = database.ref("library/books").push();
 
-            /*
-             * Firebase буде додано тут.
-             *
-             * Запланована структура:
-             *
-             * library/
-             *   books/
-             *     BOOK_ID/
-             *
-             * Storage:
-             *
-             * library/
-             *   UID/
-             *     BOOK_ID/
-             *       cover.webp
-             *       material.pdf
-             */
-
+            await bookRef.set({
+                title,
+                description: descriptionValue,
+                category,
+                fileName: file.name,
+                createdAt: firebase.database.ServerValue.TIMESTAMP
+            });
 
             console.log(
-                "Готово до Firebase-публікації:",
+                "Матеріал опубліковано:",
                 {
                     title,
                     description: descriptionValue,
@@ -373,9 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-            alert(
-                "Форма готова. Firebase-публікацію буде підключено наступним кроком."
-            );
+            alert("Матеріал успішно опубліковано.");
 
         }
     );
