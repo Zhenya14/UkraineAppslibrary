@@ -1,18 +1,19 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyDXiLOi_lFBjffofMAFMUCjPvRTpBl2Grg",
-    authDomain: "videovortex-235cd.firebaseapp.com",
-    databaseURL: "https://videovortex-235cd-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "videovortex-235cd",
-    storageBucket: "videovortex-235cd.appspot.com",
-    messagingSenderId: "681594250269",
-    appId: "1:681594250269:web:c6eb258b0803e8b7d052f4",
-    measurementId: "G-5EBPY9YHSK"
-  };
+firebase.initializeApp({
+  apiKey: "AIzaSyDXiLOi_lFBjffofMAFMUCjPvRTpBl2Grg",
+  authDomain: "videovortex-235cd.firebaseapp.com",
+  databaseURL: "https://videovortex-235cd-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "videovortex-235cd",
+  storageBucket: "videovortex-235cd.appspot.com",
+  messagingSenderId: "681594250269",
+  appId: "1:681594250269:web:c6eb258b0803e8b7d052f4",
+  measurementId: "G-5EBPY9YHSK"
+});
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-
+  const auth = firebase.auth();
+const database = firebase.database();
+const storage = firebase.storage();
+let currentUser = null;
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================
@@ -67,6 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ========================= */
 
     function openPublishModal() {
+        const user = firebase.auth().currentUser;
+
+  if (!user) {
+    
+    alert("Потрібно увійти в акаунт");
+    return;
+  }
         publishModal.classList.add("active");
 
         document.body.style.overflow = "hidden";
@@ -447,5 +455,9 @@ const observer = new IntersectionObserver((entries) => {
     rootMargin: "-30% 0px -60% 0px",
     threshold: 0
 });
+auth.onAuthStateChanged(async (user) => {
+    if (!user) return;
 
+    currentUser = user;
+});
 sections.forEach(section => observer.observe(section));
