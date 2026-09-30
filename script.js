@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearSearch =
         document.getElementById("clearSearch");
 
+    const libraryGrid =
+        document.getElementById("libraryGrid");
+
 
     /* =========================
        PUBLISH MODAL
@@ -247,6 +250,8 @@ document.addEventListener("DOMContentLoaded", () => {
        CATEGORIES
     ========================= */
 
+    let activeCategory = null;
+
     document
         .querySelectorAll(".category")
         .forEach(category => {
@@ -258,18 +263,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     const selectedCategory =
                         category.dataset.category;
 
+                    activeCategory = selectedCategory;
+
                     console.log(
                         "Категорія:",
                         selectedCategory
                     );
-
-                    /*
-                     * Пізніше:
-                     *
-                     * loadBooks({
-                     *     category: selectedCategory
-                     * });
-                     */
 
                     document
                         .getElementById("library")
@@ -277,10 +276,75 @@ document.addEventListener("DOMContentLoaded", () => {
                             behavior: "smooth"
                         });
 
+                    libraryGrid
+                        .querySelectorAll(".library-book")
+                        .forEach(book => {
+                            book.hidden =
+                                book.dataset.category !== selectedCategory;
+                        });
                 }
             );
 
         });
+
+    database.ref("library/books").on("child_added", snapshot => {
+        const book = snapshot.val();
+        const bookId = snapshot.key;
+        if (!book) {
+            return;
+        }
+
+        libraryGrid.querySelector(".empty-library")?.remove();
+
+        const card = document.createElement("article");
+        card.className = "library-book";
+        card.dataset.bookId = bookId;
+        card.dataset.category = book.category || "";
+        card.hidden = Boolean(
+            activeCategory && book.category !== activeCategory
+        );
+
+        const categoryLabel = document.createElement("span");
+        categoryLabel.className = "library-book-category";
+        categoryLabel.textContent = book.category || "Без категорії";
+
+        const title = document.createElement("h3");
+        title.textContent = book.title || "Матеріал без назви";
+
+        const descriptionText = document.createElement("p");
+        descriptionText.textContent = book.description || "";
+
+        const fileName = document.createElement("small");
+        fileName.textContent = book.fileName || "";
+
+        card.append(categoryLabel, title, descriptionText);
+
+        if (book.downloadURL) {
+            const downloadLink = document.createElement("a");
+            downloadLink.className = "library-book-download";
+            downloadLink.href = book.downloadURL;
+            downloadLink.target = "_blank";
+            downloadLink.rel = "noopener noreferrer";
+            downloadLink.textContent = `Завантажити ${book.fileName || "матеріал"}`;
+            card.append(downloadLink);
+        } else if (book.fileName) {
+            card.append(fileName);
+        }
+
+        libraryGrid.append(card);
+    }, error => {
+        console.error("Не вдалося прочитати library/books:", error);
+
+        let errorMessage = libraryGrid.querySelector(".library-load-error");
+        if (!errorMessage) {
+            errorMessage = document.createElement("p");
+            errorMessage.className = "library-load-error";
+            libraryGrid.prepend(errorMessage);
+        }
+
+        errorMessage.textContent =
+            `Не вдалося завантажити книги з Firebase: ${error.message}`;
+    });
 
 
     /* =========================
@@ -342,18 +406,35 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const bookRef = database.ref("library/books").push();
+            const bookId = bookRef.key;
 
-            await bookRef.set({
-                title,
-                description: descriptionValue,
-                category,
-                fileName: file.name,
-                createdAt: firebase.database.ServerValue.TIMESTAMP
-            });
+            const storageRef = storage
+                .ref()
+                .child(`library/books/${bookId}/${file.name}`);
+
+            try {
+                const uploadSnapshot = await storageRef.put(file);
+                const downloadURL = await uploadSnapshot.ref.getDownloadURL();
+
+                await bookRef.set({
+                    title,
+                    description: descriptionValue,
+                    category,
+                    fileName: file.name,
+                    downloadURL,
+                    storagePath: storageRef.fullPath,
+                    createdAt: firebase.database.ServerValue.TIMESTAMP
+                });
+            } catch (error) {
+                console.error("Не вдалося опублікувати матеріал:", error);
+                alert("Не вдалося завантажити матеріал. Перевір підключення та правила Firebase.");
+                return;
+            }
 
             console.log(
                 "Матеріал опубліковано:",
                 {
+                    bookId,
                     title,
                     description: descriptionValue,
                     category,
