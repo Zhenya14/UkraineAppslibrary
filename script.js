@@ -434,7 +434,7 @@ logoutButton.addEventListener(
                 });
             } catch (error) {
                 console.error("Не вдалося опублікувати матеріал:", error);
-                alert("Не вдалося завантажити матеріал. Перевір підключення та правила Firebase.");
+                alert("Не вдалося завантажити матеріал. Перевір підключення та правила Firebase." + error.message);
                 return;
             }
 
