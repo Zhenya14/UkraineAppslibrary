@@ -59,6 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput =
         document.getElementById("searchInput");
 
+    const logoutButton =
+        document.getElementById("logoutButton");
+
     const clearSearch =
         document.getElementById("clearSearch");
 
@@ -108,7 +111,11 @@ document.addEventListener("DOMContentLoaded", () => {
         closePublishModal
     );
 
-
+logoutButton.addEventListener(
+        "click", () => {
+            auth.signOut();
+        }
+    );
     cancelPublishButton.addEventListener(
         "click",
         closePublishModal
@@ -524,9 +531,22 @@ const observer = new IntersectionObserver((entries) => {
     rootMargin: "-30% 0px -60% 0px",
     threshold: 0
 });
-auth.onAuthStateChanged(async (user) => {
-    if (!user) return;
-
-    currentUser = user;
+function updateUI(user) {
+    if (user) {
+        currentUser = user.uid;
+        document.getElementById("logoutButton")
+            ?.style.setProperty("display", "flex");
+        document.getElementById("loginButton")
+            ?.style.setProperty("display", "none");
+    } else {
+        currentUser = null;
+        document.getElementById("logoutButton")
+            ?.style.setProperty("display", "none");
+        document.getElementById("loginButton")
+            ?.style.setProperty("display", "flex");
+    }
+}
+auth.onAuthStateChanged((user) => {
+    updateUI(user);
 });
 sections.forEach(section => observer.observe(section));

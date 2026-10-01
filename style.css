@@ -261,13 +261,15 @@ display: flex;
 
     transition: 0.25s ease;
 }
-.login-button {
+#loginButton, #logoutButton {
+display: none;
+    align-items: center;
+    justify-content: center;
+}
+.login-button, .logout-button {
 width: 73px;
     height: 43px;
 padding: 2000px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     color: white;
 
