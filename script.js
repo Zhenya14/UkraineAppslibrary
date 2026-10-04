@@ -337,7 +337,52 @@ logoutButton.addEventListener(
         } else if (book.fileName) {
             card.append(fileName);
         }
+        const moreBtn = document.createElement("button");
+        moreBtn.type = "button";
+        moreBtn.classList.add("more-btn");
+        moreBtn.innerHTML = `<i class="material-symbols-rounded">more_vert</i>`;
 
+        const actionMenu = document.createElement("div");
+        actionMenu.classList.add("action-menu");
+        actionMenu.style.display = "none";
+        if (currentUser === book.uid || currentUser === "L7FRYTytp6MhWbgq69w5mPFy0bJ3") {
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.innerHTML = `<i class="material-symbols-rounded">delete</i> Видалити`;
+
+            deleteButton.onclick = async () => {
+                if (!window.confirm("Видалити цей матеріал?")) {
+                    return;
+                }
+
+                deleteButton.disabled = true;
+                try {
+                    await database.ref(`library/books/${bookId}`).remove();
+                    if (book.storagePath) {
+                        try {
+                            await storage.ref(book.storagePath).delete();
+                        } catch (storageError) {
+                            console.error("Не вдалося видалити файл матеріалу:", storageError);
+                        }
+                    }
+                    card.remove();
+                } catch (error) {
+                    console.error("Не вдалося видалити матеріал:", error);
+                    alert("Не вдалося видалити матеріал. Перевір правила Firebase.");
+                    deleteButton.disabled = false;
+                }
+                actionMenu.style.display = "none";
+            };
+
+            actionMenu.appendChild(deleteButton);
+        }
+        card.appendChild(moreBtn);
+        card.appendChild(actionMenu);
+
+        moreBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            actionMenu.style.display = actionMenu.style.display === "none" ? "flex" : "none";
+        });
         libraryGrid.append(card);
     }, error => {
         console.error("Не вдалося прочитати library/books:", error);
@@ -427,6 +472,7 @@ logoutButton.addEventListener(
                     title,
                     description: descriptionValue,
                     category,
+                    uid: auth.currentUser.uid,
                     fileName: file.name,
                     downloadURL,
                     storagePath: storageRef.fullPath,

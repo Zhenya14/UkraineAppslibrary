@@ -64,7 +64,50 @@ button {
 a {
     color: inherit;
 }
+.more-btn {
+position: absolute;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+}
+.action-menu {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+    transform: translateX(-50%);
 
+  padding: 12px 14px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+
+  z-index: 10000;
+
+  animation: menuFadeScale .25s ease forwards;
+
+  /* щоб контент не липнув */
+  display: flex;
+}
+.action-menu button {
+  border-radius: 42px;
+  background: rgba(0,0,0,0.25);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 8px 12px;
+  transition: .2s;
+}
+
+.action-menu button:hover {
+  background: rgba(255,255,255,0.18);
+}
 
 /* MATERIAL ICONS */
 
@@ -674,6 +717,7 @@ padding: 2000px;
 }
 
 .library-book {
+    position: relative;
     min-width: 0;
     padding: 22px;
     background: var(--surface);
