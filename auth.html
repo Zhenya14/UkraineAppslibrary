@@ -798,7 +798,7 @@ display: none;
         <button
             type="button"
             class="library-register-button"
-            id="register-button"
+            id="register-modal-button"
         >
             Створити акаунт
         </button>
@@ -873,7 +873,8 @@ display: none;
 
     const registerButton =
         document.getElementById("register-button");
-
+ const openRegisterModal =
+        document.getElementById("register-modal-button");
     const forgotPassword =
         document.getElementById("forgot-password");
 
@@ -1039,9 +1040,13 @@ display: none;
        REGISTER
     ===================================================== */
 
-    registerButton.addEventListener("click", async () => {
+    openRegisterModal.addEventListener("click", () => {
         document.getElementById("register-title").style.display = "block";
                 document.getElementById("auth-title").style.display = "none";
+
+    });
+     registerButton.addEventListener("click", () => {
+        createAccount();
 
     });
 async function createAccount() {
@@ -1050,7 +1055,11 @@ async function createAccount() {
 
         const password =
             passwordInput.value;
-
+ const name = document.getElementById("name").value.trim();
+        const supername = document.getElementById("supername").value.trim();
+        
+        const confirmation = document.getElementById("register-confirma-password").value.trim();
+        const birthInput = document.getElementById("birthdate").value;
 
         if (!email || !password) {
 
@@ -1062,7 +1071,15 @@ async function createAccount() {
             return;
         }
 
+if (password !== confirmation) {
 
+            showStatus(
+                "Паролі не співпадають.",
+                "error"
+            );
+
+            return;
+        }
         if (password.length < 6) {
 
             showStatus(
@@ -1079,16 +1096,27 @@ async function createAccount() {
         showStatus(
             "Створення акаунта..."
         );
-
+const [year, month, day] = birthInput.split("-");
+        const birthdate = `${day}.${month}.${year}`;
+        const birthYear = parseInt(year);
 
         try {
 
-            await auth.createUserWithEmailAndPassword(
+            const userCredential = await auth.createUserWithEmailAndPassword(
                 email,
                 password
             );
+            const uid = userCredential.user.uid;
 
-
+            await database.ref("users/" + uid).set({
+                name,
+                supername,
+                email,
+                birthdate,
+                birthYear,
+                privateProfile: false,
+                createdAt: new Date().toISOString()
+            });
             showStatus(
                 "Акаунт успішно створено.",
                 "success"
