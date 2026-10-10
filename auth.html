@@ -1050,15 +1050,16 @@ display: none;
 
     });
 async function createAccount() {
+    
     const email =
-            emailInput.value.trim();
+            document.getElementById("login-email").value.trim();
 
         const password =
-            passwordInput.value;
+            document.getElementById("login-password").value;
  const name = document.getElementById("name").value.trim();
         const supername = document.getElementById("supername").value.trim();
         
-        const confirmation = document.getElementById("register-confirma-password").value.trim();
+        const confirmation = document.getElementById("register-confirm-password").value.trim();
         const birthInput = document.getElementById("birthdate").value;
 
         if (!email || !password) {
