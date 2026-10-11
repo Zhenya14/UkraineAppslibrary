@@ -606,50 +606,57 @@ display: none;
             </div>
 
         </div>
-
-<div id="register-title">   
+<form>
+    <div id="register-title">
         <h1>Реєстрація</h1>
 
         <p class="register-description">
             Створіть новий акаунт UkraineApps Library
         </p>
 
-
         <!-- FORM -->
 
         <div class="register-fields">
-                      <div class="register-input">
-                        <span class="material-symbols">
-                    person
-                </span>
-                <input 
-                   type="text" 
-                   id="name" 
-                   placeholder="Ім’я" 
-                   autocomplete="given-name">
-</div>
-  <div class="register-input">
+            <div class="register-input">
                 <span class="material-symbols">
                     person
                 </span>
-                <input 
-                   type="text" 
-                   id="supername" 
-                   placeholder="Прізвище" 
-                   autocomplete="family-name">
-  </div>
-  <div class="register-input">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Ім’я"
+                    autocomplete="given-name"
+                >
+            </div>
+
+            <div class="register-input">
+                <span class="material-symbols">
+                    person
+                </span>
+
+                <input
+                    type="text"
+                    id="supername"
+                    placeholder="Прізвище"
+                    autocomplete="family-name"
+                >
+            </div>
+
+            <div class="register-input">
                 <span class="material-symbols">
                     calendar_month
                 </span>
-                <input 
-                   type="date" 
-                   id="birthdate" 
-                   placeholder="Дата народження" 
-                   autocomplete="bday">
-</div>
-            <div class="register-input">
 
+                <input
+                    type="date"
+                    id="birthdate"
+                    placeholder="Дата народження"
+                    autocomplete="bday"
+                >
+            </div>
+
+            <div class="register-input">
                 <span class="material-symbols">
                     mail
                 </span>
@@ -660,12 +667,9 @@ display: none;
                     placeholder="Email"
                     autocomplete="email"
                 >
-
             </div>
 
-
             <div class="register-input">
-
                 <span class="material-symbols">
                     lock
                 </span>
@@ -676,12 +680,14 @@ display: none;
                     placeholder="Пароль"
                     autocomplete="current-password"
                 >
-                </div>
-                <div class="register-input">
-                    <span class="material-symbols">
+            </div>
+
+            <div class="register-input">
+                <span class="material-symbols">
                     lock
                 </span>
-<input
+
+                <input
                     type="password"
                     id="register-confirm-password"
                     placeholder="Підтвердіть пароль"
@@ -698,9 +704,8 @@ display: none;
                         visibility
                     </span>
                 </button>
-
+            </div>
         </div>
-</div>
 
         <!-- LOGIN -->
 
@@ -712,27 +717,28 @@ display: none;
             <span class="material-symbols">
                 person_add
             </span>
+
             Зареєструватися
-            <span>
-                
-            </span>
+
+            <span></span>
         </button>
-        </div>
-        <!-- TITLE -->
-<div id="auth-title">   
+    </div>
+</form>
+
+<form>
+    <!-- TITLE -->
+
+    <div id="auth-title">
         <h1>Вхід</h1>
 
         <p class="auth-description">
             Увійдіть до свого акаунта UkraineApps Library
         </p>
 
-
         <!-- FORM -->
 
         <div class="auth-fields">
-
             <div class="auth-input">
-
                 <span class="material-symbols">
                     mail
                 </span>
@@ -743,12 +749,9 @@ display: none;
                     placeholder="Email"
                     autocomplete="email"
                 >
-
             </div>
 
-
             <div class="auth-input">
-
                 <span class="material-symbols">
                     lock
                 </span>
@@ -770,11 +773,8 @@ display: none;
                         visibility
                     </span>
                 </button>
-
             </div>
-
         </div>
-
 
         <!-- LOGIN -->
 
@@ -791,8 +791,8 @@ display: none;
                 Увійти
             </span>
         </button>
-</div>
-
+    </div>
+</form>
         <!-- REGISTER -->
 
         <button
@@ -1045,27 +1045,24 @@ display: none;
                 document.getElementById("auth-title").style.display = "none";
 
     });
-     registerButton.addEventListener("click", () => {
-        createAccount();
-
-    });
+     
 async function createAccount() {
     
     const email =
-            document.getElementById("login-email").value.trim();
+            document.getElementById("register-email").value.trim();
 
         const password =
-            document.getElementById("login-password").value;
+            document.getElementById("register-password").value.trim();
  const name = document.getElementById("name").value.trim();
         const supername = document.getElementById("supername").value.trim();
         
         const confirmation = document.getElementById("register-confirm-password").value.trim();
         const birthInput = document.getElementById("birthdate").value;
 
-        if (!email || !password) {
+        if (!email || !password || !name || !supername || !confirmation || !birthInput) {
 
             showStatus(
-                "Введіть email та пароль для створення акаунта.",
+                "Введіть усі необхідні дані.",
                 "error"
             );
 
@@ -1134,8 +1131,6 @@ const [year, month, day] = birthInput.split("-");
 
         } catch (error) {
 
-            console.error(error);
-
             showStatus(
                 firebaseError(error),
                 "error"
@@ -1148,7 +1143,10 @@ const [year, month, day] = birthInput.split("-");
         }
 
     }
+registerButton.addEventListener("click", () => {
+        createAccount();
 
+    });
     /* =====================================================
        PASSWORD RESET
     ===================================================== */
