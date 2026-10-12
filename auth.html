@@ -856,6 +856,7 @@ display: none;
   // Initialize Firebase
 
     const auth = firebase.auth();
+    const database =!firebase.database();
 
 
     /* =====================================================
@@ -1046,6 +1047,7 @@ display: none;
 
     });
      
+
 async function createAccount() {
     
     const email =
@@ -1088,15 +1090,16 @@ if (password !== confirmation) {
             return;
         }
 
-
+const [year, month, day] = birthInput.split("-");
+        const birthdate = `${day}.${month}.${year}`;
+        const birthYear = parseInt(year);
+  
         registerButton.disabled = true;
 
         showStatus(
             "Створення акаунта..."
         );
-const [year, month, day] = birthInput.split("-");
-        const birthdate = `${day}.${month}.${year}`;
-        const birthYear = parseInt(year);
+
 
         try {
 
@@ -1147,6 +1150,7 @@ registerButton.addEventListener("click", () => {
         createAccount();
 
     });
+
     /* =====================================================
        PASSWORD RESET
     ===================================================== */
