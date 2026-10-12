@@ -592,7 +592,124 @@ function updateUI(user) {
             ?.style.setProperty("display", "flex");
     }
 }
+function blockScreenForVerification() {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("wrapper");
+
+    wrapper.innerHTML = `
+        <style>
+            .wrapper {
+color: #e9ecf1;
+  font-family: Inter, Segoe UI, Roboto, Arial;
+  margin: 0;
+  background: radial-gradient(ellipse at top, #0b0f17, #05060a);
+    line-height: 1.6;
+text-align: center;
+    padding: 0 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+            }
+
+            .wrapper button {
+                all: unset;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+
+                padding: 12px 28px;
+                border-radius: 999px;
+
+                background: #0b0b0b;
+                color: white;
+                border: 2px solid #2a2a2a;
+
+                cursor: pointer;
+
+                transition: 0.25s ease;
+            }
+
+            .wrapper button:hover {
+                border-color: #f472b6;
+                box-shadow: 0 0 18px rgba(244, 114, 182, .65);
+                transform: translateY(-2px);
+            }
+m
+            .wrapper button:active {
+                border-color: #06b6d4;
+                transform: scale(0.96);
+            }
+
+            #delete-account {
+                color: #ff4d4d;
+                border-color: #3a1a1a;
+            }
+
+            #logout-link-verification {
+                color: #aaa;
+                text-decoration: none;
+                display: inline-flex;
+                gap: 6px;
+            }
+
+            #logout-link-verification:hover {
+                color: white;
+            }
+        </style>
+
+        <h1>Підтвердьте вашу електронну пошту</h1>
+
+        <p>
+            Ми надіслали вам лист на пошту.
+            Перевірте також "Спам".
+        </p>
+
+        <button onclick="resendVerification()">
+            Надіслати лист ще раз
+        </button>
+
+        <a href="#" id="logout-link-verification" onclick="logout()">
+            <i class="material-symbols">logout</i>
+            <span class="icon-text">Вийти</span>
+        </a>
+
+        <p style="margin-top: 20px;">
+            Після підтвердження просто зачекайте або перезавантажте сторінку.
+        </p>
+    `;
+
+    document.body.replaceChildren(wrapper);
+}
+
+// Надіслати лист повторно
+function resendVerification() {
+    const user = auth.currentUser;
+    if (user) {
+        user.sendEmailVerification()
+            .then(() => {
+                alert("Лист підтвердження надіслано повторно!");
+            })
+            .catch((error) => {
+              alert("Помилка надсилання листа:" + error.message);
+            });
+    }
+}
 auth.onAuthStateChanged((user) => {
+
     updateUI(user);
+
+  if (!user.emailVerified) {
+            blockScreenForVerification();
+
+            const verificationInterval = setInterval(async () => {
+                await user.reload();
+
+                if (user.emailVerified) {
+                    clearInterval(verificationInterval);
+                    updateUI(user);
+                }
+            }, 5000);
+  }
 });
 sections.forEach(section => observer.observe(section));
