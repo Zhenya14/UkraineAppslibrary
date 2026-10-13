@@ -337,8 +337,7 @@ logoutButton.addEventListener(
         } else if (book.fileName) {
             card.append(fileName);
         }
-        const moreBtn = document.createElement("button");
-        moreBtn.type = "button";
+        const moreBtn = document.createElement("a");
         moreBtn.classList.add("more-btn");
         moreBtn.innerHTML = `<i class="material-symbols-rounded">more_vert</i>`;
 
