@@ -670,7 +670,7 @@ m
         </button>
 
         <a href="#" id="logout-link-verification" onclick="logout()">
-            <i class="material-symbols">logout</i>
+            <i class="material-symbols-rounded">logout</i>
             <span class="icon-text">Вийти</span>
         </a>
 
