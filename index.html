@@ -77,12 +77,12 @@
             Бібліотека
         </a>
 
-        <a href="#categories">
+        <a href="#categories" style="display: none;">
             <span class="material-symbols-rounded">category</span>
             Категорії
         </a>
 
-        <a href="#saved">
+        <a href="#saved" style="display: none;">
             <span class="material-symbols-rounded">bookmark</span>
             Збережене
         </a>
@@ -91,11 +91,11 @@
 
     <div class="header-actions">
 
-        <button class="icon-button" id="searchButton" aria-label="Пошук">
+        <button class="icon-button" id="searchButton" aria-label="Пошук" style="display: none;">
             <span class="material-symbols-rounded">search</span>
         </button>
 
-        <button class="profile-button" id="profileButton">
+        <button class="profile-button" id="profileButton" style="display: none;">
             <span class="material-symbols-rounded">person</span>
         </button>
 <button class="login-button" onclick="window.location.href='./auth.html'" id="loginButton">
@@ -177,7 +177,7 @@
 
     <!-- SEARCH -->
 
-    <section class="search-section">
+    <section class="search-section" style="display: none;">
 
         <div class="search-box">
 
@@ -367,7 +367,7 @@
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-links" style="display: none;">
         <a href="#">Про Library</a>
         <a href="#">Правила</a>
         <a href="#">Допомога</a>
@@ -390,21 +390,22 @@
         <small>Бібліотека</small>
     </a>
 
+<button id="mobilePublish">
+        <span class="material-symbols-rounded">add</span>
+    </button>
+
     <a href="#categories">
         <span class="material-symbols-rounded">category</span>
         <small>Категорії</small>
     </a>
 
-    <button id="mobilePublish">
-        <span class="material-symbols-rounded">add</span>
-    </button>
 
-    <a href="#saved">
+    <a href="#saved" style="display: none;">
         <span class="material-symbols-rounded">bookmark</span>
         <small>Збережене</small>
     </a>
 
-    <button id="mobileProfile">
+    <button id="mobileProfile" style="display: none;">
         <span class="material-symbols-rounded">person</span>
         <small>Профіль</small>
     </button>
