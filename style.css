@@ -998,7 +998,7 @@ footer {
     color: white;
 }
 
-.copyright {
+.copyright, .version {
     color: var(--muted);
 
     font-size: 12px;
